@@ -12,11 +12,12 @@ import os
 def WS_recover(id,shell):
     
     fn='data.lastframe'+str(id)+'_'+str(shell)+'_'
-    a=[]
+    n=0#total number of data frame
+    n_def=0#number of defected frame which FP did notrecover
     for i in range(30):
         fnt='./'+fn+str(i)
         if os.path.isfile(fnt):
-
+            n+=1
             pipeline = import_file(fnt)
             #mod=WignerSeitzAnalysisModifier(output_displaced=True,per_type_occupancies = True)
             mod=WignerSeitzAnalysisModifier(per_type_occupancies = True)
@@ -27,11 +28,10 @@ def WS_recover(id,shell):
             pipeline.modifiers.append(mod)
             
             data = pipeline.compute()
- 
- 
-            a.append(data.attributes['WignerSeitz.interstitial_count'])
-    return 1-(sum(a))/len(a)
-path='/home/heruhe/Desktop/Ga2o3/Frankpair/FP_beta/npt/FP_recover/random/O'
+            if data.attributes['WignerSeitz.interstitial_count']>0:
+                n_def+=1 
+    return 1-n_def/n
+path='/home/heruhe/Desktop/Ga2o3/Frenkelpair/FP_beta/npt/FP_recover/random/O'
 #path='/home/heruhe/Desktop/Ga2o3/Frankpair/FP_beta/npt/FP_recover/mix'
 os.chdir(path) 
 frames=[]
@@ -57,7 +57,7 @@ o_r=pd.DataFrame(o_recover)
 o_r.columns = ['frameid', '1shell', '2shell','3sehll']
 o_r.to_csv('o_recover_percentage') 
 
-path='/home/heruhe/Desktop/Ga2o3/Frankpair/FP_beta/npt/FP_recover/random/Ga'
+path='/home/heruhe/Desktop/Ga2o3/Frenkelpair/FP_beta/npt/FP_recover/random/Ga/first_second_shell'
 os.chdir(path) 
 frames=[]
 for f in range(21,71):
@@ -81,7 +81,6 @@ print(np.mean(Ga_recover, axis=0))
 Ga_r=pd.DataFrame(Ga_recover)
 Ga_r.columns = ['frameid', '1shell', '2shell']
 Ga_r.to_csv('ga_recover_percentage') 
-
 
 
 
