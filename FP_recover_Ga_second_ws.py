@@ -32,6 +32,7 @@ def WS_recover(id):
             data = pipeline.compute()
             if data.attributes['WignerSeitz.interstitial_count']==0:
                 n_def+=1 
+                print(id,fn)
     return (n_def, len(matching_files))
 
 path='/home/heruhe/Desktop/Ga2o3/Frenkelpair/FP_beta/npt/FP_recover/random/Ga/second_shell/second_shell'
