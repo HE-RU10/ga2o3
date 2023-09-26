@@ -1,4 +1,4 @@
-##calculate mean square displacement(MSD)
+##calculate mean square displacement(MSD) datafiles
 
 import pandas as pd
 from ovito.io import import_file, export_file
