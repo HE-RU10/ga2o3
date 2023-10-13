@@ -14,9 +14,11 @@ import warnings
 warnings.filterwarnings('ignore', message='.*OVITO.*PyPI')
 #path='/home/heruhe/Desktop/Ga2o3/cascade/5type/1500ev'
 #path= '/home/heruhe/Desktop/Ga2o3/cascade/5type_overlapping/cascade_anneal/anneal_dumpfile'
-path='/Users/ruhe/Desktop/ga2o3/FP/tabGap/Ga/anneal_1000k_2ns'
+#path='/Users/ruhe/Desktop/ga2o3/FP/tabGap/Ga/anneal_1000k_2ns'
+path='/Users/ruhe/Desktop/ga2o3/FP/tabGap/gamma/anneal1000k_2ns'
+path='/Users/ruhe/Desktop/ga2o3/overlapping/overlapping_anneal/gamma/2kev_1000k_100ps'
 # Use the glob function to search for files that match the pattern
-file_pattern = 'anneal1000_2ns.dump*'
+file_pattern = 'anneals1000_100ps.dump*'
 matching_files = glob.glob(f"{path}/{file_pattern}")
 #print(matching_files)
 # Print the list of matching files
@@ -31,7 +33,7 @@ for file in matching_files:
 
     if match:
         i = int(match.group())
-    foldern=path+'/1000_2ns_{}'.format(i)
+    foldern=path+'/1000_100ps_{}'.format(i)
     # Check if the folder exists
     if not os.path.exists(foldern):
     # If it doesn't exist, create the folder
