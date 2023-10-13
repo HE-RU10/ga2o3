@@ -8,23 +8,46 @@ import numpy as np
 from ovito.data import *
 from collections import Counter
 import os
-
+import glob
+import re
+import warnings
+warnings.filterwarnings('ignore', message='.*OVITO.*PyPI')
 #path='/home/heruhe/Desktop/Ga2o3/cascade/5type/1500ev'
-path= '/home/heruhe/Desktop/Ga2o3/cascade/5type_overlapping/cascade_anneal/anneal_dumpfile'
+#path= '/home/heruhe/Desktop/Ga2o3/cascade/5type_overlapping/cascade_anneal/anneal_dumpfile'
+path='/Users/ruhe/Desktop/ga2o3/FP/tabGap/Ga/anneal_1000k_2ns'
+# Use the glob function to search for files that match the pattern
+file_pattern = 'anneal1000_2ns.dump*'
+matching_files = glob.glob(f"{path}/{file_pattern}")
+#print(matching_files)
+# Print the list of matching files
+pkal=[]
+for file in matching_files:
+    particles=pd.DataFrame()
+    pipeline = import_file(file)
+    parts = file.split("/")
+    filename = parts[-1]
+# Use regular expression to find the number
+    match = re.search(r'\d+(?=\D*$)', filename)
 
-os.chdir(path) 
-particles=pd.DataFrame()
-
-pipeline = import_file("anneals1000_100ps.dump1900")
-print(pipeline.source.num_frames)
+    if match:
+        i = int(match.group())
+    foldern=path+'/1000_2ns_{}'.format(i)
+    # Check if the folder exists
+    if not os.path.exists(foldern):
+    # If it doesn't exist, create the folder
+        os.mkdir(foldern)
+    pkal.append(i)
 # Calculate per-particle displacements with respect to initial simulation frame:
-mod=CalculateDisplacementsModifier()
+    mod=CalculateDisplacementsModifier()
 
-pipeline.modifiers.append(mod)
-for frame in range(pipeline.source.num_frames):
+    pipeline.modifiers.append(mod)
+    frame=pipeline.source.num_frames-1
+
     data = pipeline.compute(frame)
-
+    fn=foldern+'/particle_Displacement_Magnitude.csv'
     particles['Particle Type']=data.particles['Particle Type']
     particles['Particle Identifier']=data.particles['Particle Identifier']
     particles['Displacement Magnitude']=data.particles['Displacement Magnitude']
-    particles.to_csv('particle_Displacement_Magnitude{}.csv'.format(frame)) 
+    particles.to_csv(fn)
+pkal=sorted(pkal)
+print(pkal)
