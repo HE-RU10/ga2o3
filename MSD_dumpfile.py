@@ -13,10 +13,10 @@ import re
 import warnings
 warnings.filterwarnings('ignore', message='.*OVITO.*PyPI')
 #path='/home/heruhe/Desktop/Ga2o3/cascade/5type/1500ev'
-#path= '/home/heruhe/Desktop/Ga2o3/cascade/5type_overlapping/cascade_anneal/anneal_dumpfile'
+path= '/home/heruhe/Desktop/Ga2o3/cascade/5type_overlapping/cascade_anneal/anneal_dumpfile'
 #path='/Users/ruhe/Desktop/ga2o3/FP/tabGap/Ga/anneal_1000k_2ns'
-path='/Users/ruhe/Desktop/ga2o3/FP/tabGap/gamma/anneal1000k_2ns'
-path='/Users/ruhe/Desktop/ga2o3/overlapping/overlapping_anneal/gamma/2kev_1000k_100ps'
+#path='/Users/ruhe/Desktop/ga2o3/FP/tabGap/gamma/anneal1000k_2ns'
+#path='/Users/ruhe/Desktop/ga2o3/overlapping/overlapping_anneal/gamma/2kev_1000k_100ps'
 # Use the glob function to search for files that match the pattern
 file_pattern = 'anneals1000_100ps.dump*'
 matching_files = glob.glob(f"{path}/{file_pattern}")
