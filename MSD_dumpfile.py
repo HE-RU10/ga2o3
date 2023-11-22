@@ -18,7 +18,7 @@ path= '/home/heruhe/Desktop/Ga2o3/cascade/5type_overlapping/cascade_anneal/annea
 #path='/Users/ruhe/Desktop/ga2o3/FP/tabGap/gamma/anneal1000k_2ns'
 #path='/Users/ruhe/Desktop/ga2o3/overlapping/overlapping_anneal/gamma/2kev_1000k_100ps'
 # Use the glob function to search for files that match the pattern
-file_pattern = 'anneals1000_100ps.dump*'
+file_pattern = 'anneals1000_100ps.dump2400'
 matching_files = glob.glob(f"{path}/{file_pattern}")
 #print(matching_files)
 # Print the list of matching files
