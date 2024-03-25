@@ -1,0 +1,6 @@
+['./Rotate/data.lastframe-1429', './Rotate/data.lastframe-0', './Rotate/data.lastframe-1406', './Rotate/data.lastframe-1303']
+./Rotate/data.lastframe-1429: no dislocation is cut by the z planes (no more operation).
+./Rotate/data.lastframe-0: no dislocation is cut by the z planes (no more operation).
+./Rotate/data.lastframe-1406: Dislocation-cut is spotted.
+The write of a new cell is finished.
+./Rotate/data.lastframe-1303: no dislocation is cut by the z planes (no more operation).

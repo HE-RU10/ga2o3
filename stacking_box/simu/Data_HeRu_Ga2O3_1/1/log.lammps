@@ -1,0 +1,13 @@
+LAMMPS (8 Feb 2023)
+OMP_NUM_THREADS environment is not set. Defaulting to 1 thread. (src/comm.cpp:98)
+  using 1 OpenMP thread(s) per MPI task
+variable 	 name string 'tmp'
+
+units 	 metal
+atom_style	 	 atomic
+boundary 	 p p p
+neighbor 	 2.0 bin
+neigh_modify 	 delay 0 every 1 check yes
+
+log 	 log.${name}
+log 	 log.tmp

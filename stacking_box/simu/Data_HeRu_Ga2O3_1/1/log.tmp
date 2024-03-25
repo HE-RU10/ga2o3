@@ -1,0 +1,126 @@
+
+read_data ${name}.xyz
+read_data tmp.xyz
+Reading data file ...
+  orthogonal box = (-48.9846 -47.24849 -99.81682) to (48.9846 47.24849 99.81682)
+  1 by 1 by 2 MPI processor grid
+  reading atoms ...
+  163840 atoms
+  read_data CPU = 0.303 seconds
+
+mass 1 69.723
+mass 2 69.723
+mass 3 15.9994
+mass 4 15.9994
+mass 5 15.9994
+
+pair_style	 	 hybrid/overlay eam/fs tabgap
+pair_coeff	 	 * * eam/fs /home/heruhe/Desktop/Ga2o3/potential/Ga-O_20220921.eam.fs Ga Ga O O O
+Reading eam/fs potential file /home/heruhe/Desktop/Ga2o3/potential/Ga-O_20220921.eam.fs with DATE: 2022-09-23
+pair_coeff	 	 * * tabgap /home/heruhe/Desktop/Ga2o3/potential/Ga-O_20220921.tabgap Ga Ga O O O no yes
+Reading tabgap potential file /home/heruhe/Desktop/Ga2o3/potential/Ga-O_20220921.tabgap with DATE: 2022-09-23
+
+thermo	 	 100
+thermo_style 	 custom step temp press pe etotal dt time
+
+min_style 	 cg
+minimize 	 1e-5 1e-6 10000 10000
+Neighbor list info ...
+  update: every = 1 steps, delay = 0 steps, check = yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 7
+  ghost atom cutoff = 7
+  binsize = 3.5, bins = 28 27 58
+  2 neighbor lists, perpetual/occasional/extra = 2 0 0
+  (1) pair eam/fs, perpetual
+      attributes: half, newton on
+      pair build: half/bin/atomonly/newton
+      stencil: half/bin/3d
+      bin: standard
+  (2) pair tabgap, perpetual
+      attributes: full, newton on, cut 6
+      pair build: full/bin/atomonly
+      stencil: full/bin/3d
+      bin: standard
+Per MPI rank memory allocation (min/avg/max) = 80.59 | 80.99 | 81.39 Mbytes
+   Step          Temp          Press          PotEng         TotEng           Dt            Time     
+         0   0             -3371.2638     -964206.51     -964206.51      0.001          0            
+        33   0             -14674.376     -971860.09     -971860.09      0.001          0.033        
+Loop time of 132.468 on 2 procs for 33 steps with 163840 atoms
+
+99.2% CPU use with 2 MPI tasks x 1 OpenMP threads
+
+Minimization stats:
+  Stopping criterion = energy tolerance
+  Energy initial, next-to-last, final = 
+     -964206.509787284  -971850.804947304  -971860.091826599
+  Force two-norm initial, final = 447.69249 24.333879
+  Force max component initial, final = 26.093883 3.6947698
+  Final line search alpha, max atom move = 0.0092566763 0.034201288
+  Iterations, force evaluations = 33 33
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 121.09     | 126.66     | 132.23     |  49.5 | 95.62
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0.034247   | 5.5998     | 11.165     | 235.2 |  4.23
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.2078     |            |       |  0.16
+
+Nlocal:          81920 ave       81920 max       81920 min
+Histogram: 2 0 0 0 0 0 0 0 0 0
+Nghost:        37851.5 ave       38452 max       37251 min
+Histogram: 1 0 0 0 0 0 0 0 0 1
+Neighs:    5.28406e+06 ave 5.29749e+06 max 5.27062e+06 min
+Histogram: 1 0 0 0 0 0 0 0 0 1
+FullNghs:  6.20171e+06 ave 6.24957e+06 max 6.15385e+06 min
+Histogram: 1 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 12403420
+Ave neighs/atom = 75.704468
+Neighbor list builds = 0
+Dangerous builds = 0
+
+velocity 	 all create 290 666 mom yes rot yes dist gaussian
+fix 	 1 all npt temp 290 290 0.1 iso 0.0 0.0 0.1
+timestep 	 0.001
+run 	 50
+Per MPI rank memory allocation (min/avg/max) = 71.59 | 71.99 | 72.39 Mbytes
+   Step          Temp          Press          PotEng         TotEng           Dt            Time     
+        33   290           -11124.953     -971860.09     -965718.51      0.001          0.033        
+        83   144.97733     -138.60317     -968748.86     -965678.55      0.001          0.083        
+Loop time of 197.294 on 2 procs for 50 steps with 163840 atoms
+
+Performance: 0.022 ns/day, 1096.076 hours/ns, 0.253 timesteps/s, 41.522 katom-step/s
+98.9% CPU use with 2 MPI tasks x 1 OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 183.19     | 190.03     | 196.87     |  49.6 | 96.32
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0.04713    | 6.8881     | 13.729     | 260.7 |  3.49
+Output  | 0.0003499  | 0.00036729 | 0.00038468 |   0.0 |  0.00
+Modify  | 0.3283     | 0.33096    | 0.33363    |   0.5 |  0.17
+Other   |            | 0.04408    |            |       |  0.02
+
+Nlocal:          81920 ave       81934 max       81906 min
+Histogram: 1 0 0 0 0 0 0 0 0 1
+Nghost:          37746 ave       38347 max       37145 min
+Histogram: 1 0 0 0 0 0 0 0 0 1
+Neighs:     5.2821e+06 ave 5.29678e+06 max 5.26742e+06 min
+Histogram: 1 0 0 0 0 0 0 0 0 1
+FullNghs:  6.17776e+06 ave 6.22274e+06 max 6.13278e+06 min
+Histogram: 1 0 0 0 0 0 0 0 0 1
+
+Total # of neighbors = 12355518
+Ave neighs/atom = 75.412097
+Neighbor list builds = 0
+Dangerous builds = 0
+
+write_dump	 	 all custom ${name}.xyz element x y z type modify element Ga1 Ga2 O1 O2 O3
+write_dump	 	 all custom tmp.xyz element x y z type modify element Ga1 Ga2 O1 O2 O3
+WARNING: Dump WRITE_DUMP includes no atom IDs and is not sorted by ID. This may complicate post-processing tasks or visualization (src/dump.cpp:236)
+Total wall time: 0:05:40
